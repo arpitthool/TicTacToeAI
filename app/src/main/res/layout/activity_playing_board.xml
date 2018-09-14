@@ -25,24 +25,26 @@
                 android:id="@+id/radio_grp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="27dp">
-
-                <RadioButton
-                    android:id="@+id/radio_secondPlayerAI"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:text="Second Player AI"
-                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radio_firstPlayerAI"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="First Player AI"
+                    android:text="Computer plays First"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radio_secondPlayerAI"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Computer plays second"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18sp" />
 
                 <RadioButton
@@ -51,6 +53,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="Human Vs Human"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18sp" />
             </RadioGroup>
 
@@ -67,7 +70,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:elevation="5dp"
                     android:text="Refresh"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="20sp"
                     tools:layout_editor_absoluteX="113dp"
                     tools:layout_editor_absoluteY="162dp" />
 
@@ -76,7 +82,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textSize="16sp"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="20sp"
                     tools:layout_editor_absoluteX="222dp"
                     tools:layout_editor_absoluteY="82dp" />
             </LinearLayout>

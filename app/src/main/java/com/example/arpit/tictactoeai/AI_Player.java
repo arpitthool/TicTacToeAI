@@ -1,9 +1,11 @@
 package com.example.arpit.tictactoeai;
 
 /**
- *
+ *refer https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/ for code explanation
  * @author arpit
  */
+
+
 public class AI_Player {
 
     public class Move {
@@ -11,6 +13,8 @@ public class AI_Player {
         int row, col;
     }
 
+    private static final int Max = 1000;
+    private static final int Min = -1000;
     int player = 1 , opponent = -1 ;
     boolean isMax = false ;
 
@@ -59,8 +63,8 @@ public class AI_Player {
         return 0;
     }
     // This is the minimax function. It considers all
-// the possible ways the game can go and returns
-// the value of the board
+    // the possible ways the game can go and returns
+    // the value of the board
 
     private int minimax(int[][] board, int depth, boolean isMax) {
 
@@ -70,13 +74,13 @@ public class AI_Player {
         // If Maximizer has won the game return his/her
         // evaluated score
         if (score == 10) {
-            return score;
+            return score - depth;
         }
 
         // If Minimizer has won the game return his/her
         // evaluated score
         if (score == -10) {
-            return score;
+            return score + depth;
         }
 
         // If there are no more moves and no winner then
@@ -87,7 +91,7 @@ public class AI_Player {
 
         // If this maximizer's move
         if (isMax) {
-            int best = -1000;
+            int best = Min;
 
             // Traverse all cells
             for (int i = 0; i < 3; i++) {
@@ -109,7 +113,7 @@ public class AI_Player {
             return best;
         } // If this minimizer's move
         else {
-            int best = 1000;
+            int best = Max;
 
             // Traverse all cells
             for (int i = 0; i < 3; i++) {
@@ -132,6 +136,90 @@ public class AI_Player {
         }
     }
 
+    //minimax algorithm with alpha-beta pruning
+
+    private int minimaxAlphaBeta( int[][] board, int depth, boolean isMax, int alpha, int beta){
+        int score = evaluate(board);
+
+        // If Maximizer has won the game return his/her
+        // evaluated score
+        if (score == 10) {
+            return score - depth;
+        }
+
+        // If Minimizer has won the game return his/her
+        // evaluated score
+        if (score == -10) {
+            return score + depth;
+        }
+
+        // If there are no more moves and no winner then
+        // it is a tie
+        if (isMoveLeft(board) == false) {
+            return 0;
+        }
+
+        // If this maximizer's move
+        if (isMax) {
+            int best = Min;
+
+            // Traverse all cells
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    // Check if cell is empty
+                    if (board[i][j] == 0) {
+                        // Make the move
+                        board[i][j] = player;
+
+                        // Call minimax recursively and choose
+                        // the maximum value
+                        best = Math.max(best, minimaxAlphaBeta(board, depth + 1, !isMax, alpha, beta));
+
+                        // Undo the move
+                        board[i][j] = 0;
+
+                        alpha = Math.max(alpha, best);
+                        // Alpha Beta Pruning
+                        if (beta <= alpha) {
+                            System.out.println("Prunned");
+                            break;
+                        }
+                    }
+                }
+            }
+            return best;
+        } // If this minimizer's move
+        else {
+            int best = Max;
+
+            // Traverse all cells
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    // Check if cell is empty
+                    if (board[i][j] == 0) {
+                        // Make the move
+                        board[i][j] = opponent;
+
+                        // Call minimax recursively and choose
+                        // the minimum value
+                        best = Math.min(best, minimaxAlphaBeta(board, depth + 1, !isMax, alpha, beta));
+
+                        // Undo the move
+                        board[i][j] = 0;
+
+                        beta = Math.min(beta, best);
+                        // Alpha Beta Pruning
+                        if (beta <= alpha) {
+                            System.out.println("Prunned");
+                            break;
+                        }
+                    }
+                }
+            }
+            return best;
+        }
+    }
+
     // This will return the best possible move for the player
     public int[] findBestMove(int[][] board) {
         int bestVal = -1000;
@@ -139,20 +227,20 @@ public class AI_Player {
         bestMove.row = -1;
         bestMove.col = -1;
 
-        // Traverse all cells, evalutae minimax function for
+        // Traverse all cells, evaluate minimax function for
         // all empty cells. And return the cell with optimal
         // value.
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                // Check if celll is empty
+                // Check if cell is empty
                 if (board[i][j] == 0) {
                     // Make the move
                     board[i][j] = player;
 
                     // compute evaluation function for this
                     // move.
-                    int moveVal = minimax(board, 0, isMax);
-
+                    //int moveVal = minimax(board, 0, isMax);
+                    int moveVal = minimaxAlphaBeta( board, 0,isMax, Min, Max);
                     // Undo the move
                     board[i][j] = 0;
 

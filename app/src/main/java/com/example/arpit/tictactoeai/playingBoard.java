@@ -5,14 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class playingBoard extends AppCompatActivity {
 
     private Button btnRefresh;
+    private Random rand = new Random();
+    private int firstPlayerAIStart[][] = {{0,0},{2,2},{0,2},{2,0}};
     private TextView playerWon;
+    private RadioButton humanVshuman;
     private RadioGroup rg;
     private boolean firstPlayerAI = false;
     private boolean secondPlayerAI = false;
@@ -84,6 +90,9 @@ public class playingBoard extends AppCompatActivity {
                 }
             }
         });
+
+        humanVshuman = (RadioButton)findViewById(R.id.radio_humanVshuman);
+        this.humanVshuman.toggle();
 
         playAI();
     }
@@ -286,7 +295,8 @@ public class playingBoard extends AppCompatActivity {
         if( this.isMoveLeft() ) {
             if (this.firstPlayerAI && this.counter % 2 == 1) {
                 if (this.counter == 1) {
-                    this.buttonsArray[0][0].performClick();
+                    int randMove = rand.nextInt(4);
+                    this.clickButton( this.firstPlayerAIStart[randMove][0], this.firstPlayerAIStart[randMove][1]);
                 } else {
                     AI_Player x = new AI_Player();
                     int[] bestMove = x.findBestMove(this.board);

@@ -1,6 +1,10 @@
 package com.example.arpit.tictactoeai;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +36,6 @@ public class playingBoard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing_board);
@@ -97,6 +100,16 @@ public class playingBoard extends AppCompatActivity {
         playAI();
     }
 
+    private void playerWinsSound(){
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void clickButton(int i, int j) {
         if( firstPlayerAI){
             if ( counter % 2 == 1) {
@@ -137,42 +150,51 @@ public class playingBoard extends AppCompatActivity {
             if( this.firstPlayerAI){
                 this.playerWon.setText("Haha I Win!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else if(this.secondPlayerAI){
                 this.playerWon.setText("Haha I Win!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else{
                 this.playerWon.setText("Player 1 Wins!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
         }
         else if( this.findWinner() == -1){
             if( this.firstPlayerAI){
                 this.playerWon.setText("Haha I Win!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else if(this.secondPlayerAI){
                 this.playerWon.setText("Haha I Win!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else{
                 this.playerWon.setText("Player 1 Wins!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
         }
         else if (!this.isMoveLeft()) {
             if( this.firstPlayerAI){
                 this.playerWon.setText("It's a Draw!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else if(this.secondPlayerAI){
                 this.playerWon.setText("It's a Draw!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
             else{
                 this.playerWon.setText("It's a Draw!!");
                 this.disableAll();
+                this.playerWinsSound();
             }
         }
     }

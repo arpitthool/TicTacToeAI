@@ -18,6 +18,8 @@ import java.util.Random;
 
 public class playingBoard extends AppCompatActivity {
 
+    private Uri notification;
+    private Ringtone r;
     private Button btnRefresh;
     private Random rand = new Random();
     private int firstPlayerAIStart[][] = {{0,0},{2,2},{0,2},{2,0}};
@@ -36,6 +38,9 @@ public class playingBoard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        this.notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        this.r = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playing_board);
@@ -102,9 +107,7 @@ public class playingBoard extends AppCompatActivity {
 
     private void playerWinsSound(){
         try {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-            r.play();
+            this.r.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -198,15 +201,7 @@ public class playingBoard extends AppCompatActivity {
             }
         }
     }
-
-    private void pause(int x){
-        try {
-            Thread.sleep(x);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
+    
     private void disableAll(){
         for ( int i=0;i<3;i++ ){
             for( int j=0;j<3;j++){

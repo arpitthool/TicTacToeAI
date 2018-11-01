@@ -224,71 +224,31 @@ public class playingBoard extends AppCompatActivity {
     private int findWinner() {
         for (int i = 0; i < 3; i++) {
             if (this.board[i][0] + this.board[i][1] + this.board[i][2] == 3) {
-                /*
-                this.buttonsArray[i][0].setHighlightColor(Color.CYAN);
-                this.buttonsArray[i][1].setHighlightColor(Color.CYAN);
-                this.buttonsArray[i][2].setHighlightColor(Color.CYAN);
-                */
                 return 1;
             } else if (this.board[i][0] + this.board[i][1] + this.board[i][2] == -3) {
-                /*
-                this.buttonsArray[i][0].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[i][1].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[i][2].setBackgroundColor(Color.CYAN);
-                */
                 return -1;
             }
         }
         for (int i = 0; i < 3; i++) {
-            if (this.board[0][i] + this.board[1][i] + this.board[2][i] == 3) {
-                /*
-                this.buttonsArray[0][i].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[1][i].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[2][i].setBackgroundColor(Color.CYAN);
-                */
+            if (this.board[0][i] + this.board[1][i] + this.board[2][i] == 3)
                 return 1;
-            }
-            if (this.board[0][i] + this.board[1][i] + this.board[2][i] == -3) {
-                /*
-                this.buttonsArray[0][i].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[1][i].setBackgroundColor(Color.CYAN);
-                this.buttonsArray[2][i].setBackgroundColor(Color.CYAN);
-                */
+
+            if (this.board[0][i] + this.board[1][i] + this.board[2][i] == -3)
                 return -1;
-            }
+
         }
 
         if (this.board[0][0] + this.board[1][1] + this.board[2][2] == 3) {
-            /*
-            this.buttonsArray[0][0].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[1][1].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[2][2].setBackgroundColor(Color.CYAN);
-            */
             return 1;
         }
         if (this.board[0][0] + this.board[1][1] + this.board[2][2] == -3) {
-            /*
-            this.buttonsArray[0][0].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[1][1].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[2][2].setBackgroundColor(Color.CYAN);
-            */
             return -1;
         }
 
         if (this.board[0][2] + this.board[1][1] + this.board[2][0] == 3) {
-            /*
-            this.buttonsArray[0][2].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[1][1].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[2][0].setBackgroundColor(Color.CYAN);
-            */
             return 1;
         }
         if (this.board[0][2] + this.board[1][1] + this.board[2][0] == -3) {
-            /*
-            this.buttonsArray[0][2].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[1][1].setBackgroundColor(Color.CYAN);
-            this.buttonsArray[2][0].setBackgroundColor(Color.CYAN);
-            */
             return -1;
         }
         return 0;

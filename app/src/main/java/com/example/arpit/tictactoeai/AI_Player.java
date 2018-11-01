@@ -20,13 +20,11 @@ public class AI_Player {
 
 
     private boolean isMoveLeft(int[][] board) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board[i][j] == 0) {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                if (board[i][j] == 0)
                     return true;
-                }
-            }
-        }
+
         return false;
     }
 
@@ -62,6 +60,7 @@ public class AI_Player {
         }
         return 0;
     }
+
     // This is the minimax function. It considers all
     // the possible ways the game can go and returns
     // the value of the board
@@ -111,7 +110,8 @@ public class AI_Player {
                 }
             }
             return best;
-        } // If this minimizer's move
+        }
+        // If this is minimizer's move
         else {
             int best = Max;
 
@@ -182,7 +182,7 @@ public class AI_Player {
                         // Alpha Beta Pruning
                         if (beta <= alpha) {
                             System.out.println("Prunned");
-                            break;
+                            return best;
                         }
                     }
                 }
@@ -211,7 +211,7 @@ public class AI_Player {
                         // Alpha Beta Pruning
                         if (beta <= alpha) {
                             System.out.println("Prunned");
-                            break;
+                            return best;
                         }
                     }
                 }
@@ -230,6 +230,7 @@ public class AI_Player {
         // Traverse all cells, evaluate minimax function for
         // all empty cells. And return the cell with optimal
         // value.
+        //first layer of minimax algorithm i.e. MAX is applied here that's why we start with Max = false;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 // Check if cell is empty
